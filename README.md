@@ -4,6 +4,9 @@
 [![Backtest: 576 Tokens (+725.82% Return / 4.11% Max DD)](https://img.shields.io/badge/Empirical_Backtest-576_Tokens_(%2B725.82%25)-10B981)](#empirical-backtest-validation-576-tokens)
 [![Security: Fail-Closed Anti-Rug Sentinel](https://img.shields.io/badge/Web3_Security-Fail--Closed_Anti--Rug_Sentinel-EF4444)](#anti-rug-sentinel--web3-for-social-good)
 [![Ecosystem: BNB Chain | Tokenized Stocks | Nebius NVIDIA | Tavily](https://img.shields.io/badge/Ecosystem-BNB_Chain_%7C_RWA_Stocks_%7C_Nebius_NVIDIA_%7C_Tavily-F59E0B)](#ecosystem--sponsor-integrations)
+[![Demo Video: YouTube 1080p](https://img.shields.io/badge/🎥%20Watch%20Demo%20Video-YouTube%201080p-red)](https://youtu.be/coP3PXuOTxg)
+
+> 🎬 **Watch the 1m56s 1080p English-Narrated Demo Video**: **[https://youtu.be/coP3PXuOTxg](https://youtu.be/coP3PXuOTxg)**
 
 > *"Bridging TradFi macro-industrial intelligence (`AlphaRadar`) with empirical wick-stripped post-listing entry timing, Fail-Closed counterfeit token interception, and automated $2.5\times$ principal-recovery discipline (`Aralpha`)."*
 
