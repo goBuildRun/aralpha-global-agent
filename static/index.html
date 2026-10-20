@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AlphaNexus (Aralpha × AlphaRadar) — Autonomous On-Chain Alpha Hunter & Anti-Rug Sentinel</title>
+  <style>
+    :root {
+      --bg-base: #090D16;
+      --bg-card: #111827;
+      --bg-elevated: #1B2436;
+      --border: #26324B;
+      --text-main: #F3F6FC;
+      --text-muted: #94A3B8;
+      --accent-gold: #F59E0B;
+      --accent-emerald: #10B981;
+      --accent-crimson: #EF4444;
+      --accent-cyan: #06B6D4;
+      --accent-purple: #8B5CF6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(circle at top right, #131F36 0%, var(--bg-base) 65%);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "SF Pro Display", "Segoe UI", sans-serif;
+      line-height: 1.45;
+      min-height: 100vh;
+      padding-bottom: 64px;
+    }
+    header {
+      background: rgba(17, 24, 39, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 26px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+    .brand-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .brand-badge {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #F59E0B, #10B981);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 19px;
+      color: #090D16;
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.35);
+    }
+    .brand-title h1 {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.2px;
+    }
+    .brand-title p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .track-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .track-btn {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+    .track-btn.active, .track-btn:hover {
+      border-color: var(--accent-gold);
+      color: #FFF;
+      background: rgba(245, 158, 11, 0.16);
+    }
+    .kpi-strip {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+      padding: 14px 26px;
+      background: rgba(11, 16, 28, 0.78);
+      border-bottom: 1px solid var(--border);
+    }
+    .kpi-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 14px;
+    }
+    .kpi-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+    }
+    .kpi-val {
+      font-size: 20px;
+      font-weight: 800;
+      margin-top: 2px;
+    }
+    .kpi-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    #p1-alert-banner {
+      display: none;
+      margin: 14px 26px 0;
+      padding: 14px 20px;
+      border-radius: 12px;
+      background: linear-gradient(90deg, rgba(16, 185, 129, 0.22), rgba(245, 158, 11, 0.22));
+      border: 1.5px solid var(--accent-emerald);
+      color: #FFF;
+      font-size: 13.5px;
+      font-weight: 600;
+      box-shadow: 0 8px 28px rgba(16, 185, 129, 0.25);
+    }
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 370px;
+      gap: 20px;
+      padding: 18px 26px;
+    }
+    .tabs-nav {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+    }
+    .tab-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 9px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .tab-btn.active {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.22), rgba(6, 182, 212, 0.18));
+      border-color: var(--accent-gold);
+      color: #FFF;
+      box-shadow: 0 4px 16px rgba(245, 158, 11, 0.2);
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .section-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      gap: 12px;
+    }
+    .section-title {
+      font-size: 15px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .badge-emerald { background: rgba(16, 185, 129, 0.18); color: #34D399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-gold { background: rgba(245, 158, 11, 0.18); color: #FBBF24; border: 1px solid rgba(245, 158, 11, 0.4); }
+    .badge-crimson { background: rgba(239, 68, 68, 0.18); color: #F87171; border: 1px solid rgba(239, 68, 68, 0.45); }
+    .badge-cyan { background: rgba(6, 182, 212, 0.18); color: #22D3EE; border: 1px solid rgba(6, 182, 212, 0.4); }
+    .badge-purple { background: rgba(139, 92, 246, 0.18); color: #A78BFA; border: 1px solid rgba(139, 92, 246, 0.4); }
+    .btn {
+      background: linear-gradient(135deg, #F59E0B, #D97706);
+      color: #090D16;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 12.5px;
+      cursor: pointer;
+      transition: transform 0.12s, box-shadow 0.12s;
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35); }
+    .btn-emerald { background: linear-gradient(135deg, #10B981, #059669); color: #06130E; }
+    .btn-crimson { background: linear-gradient(135deg, #EF4444, #DC2626); color: #FFF; }
+    .btn-cyan { background: linear-gradient(135deg, #06B6D4, #0284C7); color: #FFF; }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .token-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      position: relative;
+    }
+    .token-card.highlight-green { border-color: var(--accent-emerald); }
+    .token-card.highlight-gold { border-color: var(--accent-gold); }
+    .token-card.highlight-red { border-color: var(--accent-crimson); }
+    .token-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+    .token-sym { font-size: 16px; font-weight: 800; }
+    .token-name { font-size: 12px; color: var(--text-muted); }
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      background: rgba(9, 13, 22, 0.65);
+      padding: 9px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
+    .metrics-row div span { display: block; font-size: 10.5px; color: var(--text-muted); }
+    .metrics-row div strong { font-size: 13px; }
+    .reason-box {
+      font-size: 12px;
+      color: #CBD5E1;
+      background: rgba(15, 23, 42, 0.75);
+      border-left: 3px solid var(--accent-cyan);
+      padding: 8px 10px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+    th, td {
+      padding: 9px 10px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    th {
+      color: var(--text-muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    tr.optimal-row {
+      background: rgba(16, 185, 129, 0.13);
+      font-weight: 700;
+    }
+    .telemetry-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      position: sticky;
+      top: 78px;
+      max-height: calc(100vh - 96px);
+      overflow-y: auto;
+    }
+    .log-item {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 11.5px;
+    }
+    .log-item pre {
+      margin-top: 6px;
+      font-family: "JetBrains Mono", "SF Mono", monospace;
+      font-size: 10.5px;
+      color: #93C5FD;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .mono { font-family: "JetBrains Mono", "SF Mono", monospace; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand-row">
+      <div class="brand-badge">αN</div>
+      <div class="brand-title">
+        <h1>AlphaNexus (Aralpha × AlphaRadar) · Autonomous On-Chain Alpha & Anti-Rug Sentinel</h1>
+        <p>Wick-Stripped Golden Window Pricing [support, +22%] · Fail-Closed Fake Token Interceptor · 2.5x Principal Recovery · 4-Layer Macro-to-OnChain Bridge</p>
+      </div>
+    </div>
+    <div class="track-bar">
+      <button class="track-btn active" onclick="setTrackFocus('all', this)">Full Matrix (All Tracks)</button>
+      <button class="track-btn" onclick="setTrackFocus('smu_social_good', this)">SMU Web3 Social Good (Anti-Rug)</button>
+      <button class="track-btn" onclick="setTrackFocus('bnb_kickstart', this)">BNB Chain AI Agent & RWA Stocks</button>
+      <button class="track-btn" onclick="setTrackFocus('mdba_macro', this)">MDBA Blockchain AI (Macro Bridge)</button>
+    </div>
+  </header>
+
+  <div class="kpi-strip">
+    <div class="kpi-box">
+      <div class="kpi-label">Empirical Registry & K-Lines</div>
+      <div class="kpi-val" style="color: var(--accent-cyan);">684 / 576</div>
+      <div class="kpi-sub">555 Web3 + 21 RWA Stocks (4STOCK)</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-label">Optimal C06 Portfolio Return</div>
+      <div class="kpi-val" style="color: var(--accent-emerald);">+725.82%</div>
+      <div class="kpi-sub">$10,000 ➔ $82,582.30 (Sharpe 0.98)</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-label">Max Drawdown Compression</div>
+      <div class="kpi-val" style="color: var(--accent-gold);">4.11%</div>
+      <div class="kpi-sub">vs. 90.12% in T+1h FOMO Chase</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-label">100x+ Multi-Baggers Captured</div>
+      <div class="kpi-val" style="color: var(--accent-purple);">7 Tokens</div>
+      <div class="kpi-sub">BTW 549x · AKE 438x · COAI 342x</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-label">Anti-Rug Sentinel Status</div>
+      <div class="kpi-val" id="kpi-scam-count" style="color: var(--accent-crimson);">Fail-Closed</div>
+      <div class="kpi-sub">100% Fake Clone / Honeypot Block</div>
+    </div>
+    <div class="kpi-box">
+      <div class="kpi-label">Global Safety Invariants</div>
+      <div class="kpi-val" id="kpi-ks-status" style="color: var(--accent-emerald);">9 / 9 Active</div>
+      <div class="kpi-sub">KillSwitch & Per-Account Isolation</div>
+    </div>
+  </div>
+
+  <div id="p1-alert-banner"></div>
+
+  <div class="main-grid">
+    <div>
+      <div class="tabs-nav">
+        <button class="tab-btn active" onclick="switchTab('tab-action', this)">1. 待卖与待买 · Golden Window & 2.5x Free-Ride</button>
+        <button class="tab-btn" onclick="switchTab('tab-sentinel', this)">2. 上新与防伪 · Anti-Rug & Fake Token Sentinel</button>
+        <button class="tab-btn" onclick="switchTab('tab-macro', this)">3. 宏观穿透镜 · AlphaRadar Macro-to-OnChain Bridge</button>
+        <button class="tab-btn" onclick="switchTab('tab-backtest', this)">4. 规律与回测 · 576-Token Backtest & 9 Invariants</button>
+      </div>
+
+      <!-- TAB 1: GOLDEN WINDOW & 2.5X FREE-RIDE WORKBENCH -->
+      <div id="tab-action" class="tab-panel active">
+        <div class="section-card">
+          <div class="section-header">
+            <div>
+              <div class="section-title">
+                <span>📌 Waiting-to-Sell Ledger · 2.5x Principal Recovery ("Free-Ride") & Moonbag Trailing Stop</span>
+                <span class="badge badge-emerald">4-Tier Alerting Active</span>
+              </div>
+              <p style="font-size: 12px; color: var(--text-muted); margin-top: 3px;">
+                Enforces institutional take-profit discipline: Sell 40% at 2.5x to recover 100% initial capital, then ride the 60% zero-cost Moonbag toward 5x / 10x / 100x.
+              </p>
+            </div>
+            <button class="btn btn-emerald" onclick="trigger25xSurge('COAI')">🔥 Simulate 2.5x Surge & 4-Tier Sell Trigger (COAI)</button>
+          </div>
+          <div id="holding-cards" class="cards-grid"></div>
+        </div>
+
+        <div class="section-card">
+          <div class="section-header">
+            <div>
+              <div class="section-title">
+                <span>🎯 Waiting-to-Buy Opportunity Funnel · Wick-Stripped Support Zone [support, +22%]</span>
+                <span class="badge badge-gold">Excludes bar[0] 1s Opening Fake Wick</span>
+              </div>
+              <p style="font-size: 12px; color: var(--text-muted); margin-top: 3px;">
+                Strips 1-second opening auction wicks (e.g., DNA $0.0400 fake wick vs. $0.1750 real washout support) and blocks FOMO chasing when price bounces >22% above support.
+              </p>
+            </div>
+            <button class="btn" onclick="executeBscBuy('DNA', 300)">⚡ Execute BSC Golden Window DCA Buy ($300 DNA)</button>
+          </div>
+          <div id="funnel-cards" class="cards-grid"></div>
+        </div>
+      </div>
+
+      <!-- TAB 2: ANTI-RUG SENTINEL & FAKE TOKEN INTERCEPTOR -->
+      <div id="tab-sentinel" class="tab-panel">
+        <div class="section-card">
+          <div class="section-header">
+            <div>
+              <div class="section-title">
+                <span>🛡️ On-Chain Anti-Rug & Counterfeit Token Sentinel (Web3 for Social Good)</span>
+                <span class="badge badge-crimson">Fail-Closed Execution Gate (INV-06)</span>
+              </div>
+              <p style="font-size: 12px; color: var(--text-muted); margin-top: 3px;">
+                Cross-verifies candidate contract addresses against the official 684-token Binance Alpha & BNB Chain registry, checks LP lock & honeypot tax, and auto-files abuse reports.
+              </p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn btn-crimson" onclick="runContractCheck('DNA', '0xdeadbeef0000999988887777666655554444fafa')">🚨 Simulate Fake Clone Attack (DNA Honeypot)</button>
+              <button class="btn btn-emerald" onclick="runContractCheck('DNA', '0xa991f61940095aea0724ef54077223b048c5cf7b')">✅ Verify Official DNA Contract</button>
+            </div>
+          </div>
+          <div id="sentinel-logs"></div>
+        </div>
+      </div>
+
+      <!-- TAB 3: ALPHARADAR MACRO-TO-ONCHAIN BRIDGE -->
+      <div id="tab-macro" class="tab-panel">
+        <div class="section-card">
+          <div class="section-header">
+            <div>
+              <div class="section-title">
+                <span>🔬 AlphaRadar 4-Layer Macro-to-OnChain Evidence Chain</span>
+                <span class="badge badge-cyan">Zero-Hallucination Evidence Contract</span>
+              </div>
+              <p style="font-size: 12px; color: var(--text-muted); margin-top: 3px;">
+                Layer 1 Macro/Policy Catalyst ➔ Layer 2 Tech Route ➔ Layer 3 Value-Chain Margin ➔ Layer 4 On-Chain Alpha & Tokenized Stock Mapping (Nebius NVIDIA + Tavily).
+              </p>
+            </div>
+            <button class="btn btn-cyan" onclick="runMacroScan()">⚡ Synthesize Live Macro-to-OnChain Signal</button>
+          </div>
+          <div id="macro-chains"></div>
+        </div>
+      </div>
+
+      <!-- TAB 4: 576-TOKEN EMPIRICAL BACKTEST & 9 SAFETY INVARIANTS -->
+      <div id="tab-backtest" class="tab-panel">
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-title">
+              <span>📊 Strategy Optimization Grid (576 Tokens · $10,000 Initial Capital)</span>
+              <span class="badge badge-emerald">C06 Optimal: +725.82% Return / 4.11% Max DD</span>
+            </div>
+          </div>
+          <table id="opt-grid-table"></table>
+        </div>
+
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-title">
+              <span>⏱️ Post-Listing Entry Window Empirical Matrix (Why We Never Chase T+1h)</span>
+              <span class="badge badge-gold">Golden Window T+12h~72h</span>
+            </div>
+          </div>
+          <table id="timing-window-table"></table>
+        </div>
+
+        <div class="section-card">
+          <div class="section-header">
+            <div class="section-title">
+              <span>🏆 100x+ Multi-Bagger Hall of Fame & 9 Global Safety Invariants</span>
+              <span class="badge badge-purple">StrategyDefinition ⊥ Account Isolation</span>
+            </div>
+            <button class="btn btn-crimson" onclick="toggleKillSwitch()">🛑 Toggle Operator KillSwitch (INV-09)</button>
+          </div>
+          <div id="invariants-grid" class="cards-grid"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDEBAR: LIVE SPONSOR TELEMETRY & AUDIT LOG -->
+    <div class="telemetry-panel">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+        <h3 style="font-size: 14px; font-weight: 800;">📡 Live Sponsor & Chain Telemetry</h3>
+        <span class="badge badge-cyan">Real-Time Audit</span>
+      </div>
+      <p style="font-size: 11.5px; color: var(--text-muted); margin-bottom: 12px;">
+        Verifiable execution trace across BNB Chain (BSC/PancakeSwap), GoPlus Anti-Rug Sentinel, Nebius NVIDIA Nemotron-70B, and Tavily Search.
+      </p>
+      <div id="telemetry-list"></div>
+    </div>
+  </div>
+
+  <script>
+    let APP_STATE = null;
+
+    function switchTab(tabId, btnEl) {
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      if (btnEl) btnEl.classList.add('active');
+    }
+
+    function setTrackFocus(track, btnEl) {
+      document.querySelectorAll('.track-btn').forEach(b => b.classList.remove('active'));
+      if (btnEl) btnEl.classList.add('active');
+      if (track === 'smu_social_good') {
+        switchTab('tab-sentinel', document.querySelectorAll('.tab-btn')[1]);
+      } else if (track === 'bnb_kickstart') {
+        switchTab('tab-action', document.querySelectorAll('.tab-btn')[0]);
+      } else if (track === 'mdba_macro') {
+        switchTab('tab-macro', document.querySelectorAll('.tab-btn')[2]);
+      } else {
+        switchTab('tab-action', document.querySelectorAll('.tab-btn')[0]);
+      }
+    }
+
+    function renderAll() {
+      if (!APP_STATE) return;
+
+      // Render Holdings (Waiting to Sell)
+      const holdEl = document.getElementById('holding-cards');
+      holdEl.innerHTML = APP_STATE.holding_positions.map(pos => {
+        const isTriggered = pos.is_recovery_reached || pos.status.includes('TRIGGER');
+        return `
+          <div class="token-card ${isTriggered ? 'highlight-green' : 'highlight-gold'}">
+            <div class="token-top">
+              <div>
+                <div class="token-sym">${pos.symbol} <span class="badge badge-cyan">${pos.chain_name}</span></div>
+                <div class="token-name">${pos.name} (${pos.alpha_id})</div>
+              </div>
+              <span class="badge ${isTriggered ? 'badge-emerald' : 'badge-gold'}">
+                ${isTriggered ? '🔥 2.5x FREE-RIDE TRIGGERED' : pos.status}
+              </span>
+            </div>
+            <div class="metrics-row">
+              <div><span>Entry / Live Price</span><strong>$${pos.entry_price.toFixed(4)} ➔ $${pos.live_price.toFixed(4)}</strong></div>
+              <div><span>Live Multiple</span><strong style="color:#34D399;">${pos.live_multiple}x ($${pos.current_value_usd})</strong></div>
+              <div><span>2.5x Recovery Target</span><strong style="color:#FBBF24;">$${pos.principal_recovery_target.toFixed(4)}</strong></div>
+            </div>
+            <div class="reason-box">
+              <strong>Free-Ride Rule:</strong> ${pos.sell_rule_summary}<br/>
+              <span class="mono" style="font-size:11px; color:#94A3B8;">Verified CA: ${pos.official_contract.slice(0, 18)}... | Tx: ${pos.tx_hash.slice(0, 16)}...</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Render Waiting-to-Buy Funnel
+      const funnelEl = document.getElementById('funnel-cards');
+      funnelEl.innerHTML = APP_STATE.waiting_to_buy_funnel.map(item => {
+        const inZone = item.is_in_buy_price_zone;
+        return `
+          <div class="token-card ${inZone ? 'highlight-green' : 'highlight-red'}">
+            <div class="token-top">
+              <div>
+                <div class="token-sym">
+                  ${item.symbol}
+                  <span class="badge ${item.is_rwa_or_stock ? 'badge-purple' : 'badge-cyan'}">${item.is_rwa_or_stock ? 'BNB RWA Stock' : item.chain_name}</span>
+                </div>
+                <div class="token-name">${item.name} · Alpha Score ${item.alpha_score} · Macro ${item.macro_catalyst_score}</div>
+              </div>
+              <span class="badge ${inZone ? 'badge-emerald' : 'badge-crimson'}">${item.status_badge}</span>
+            </div>
+            <div class="metrics-row">
+              <div><span>1s Fake Wick (Stripped)</span><strong style="color:#F87171; text-decoration:line-through;">$${item.opening_1s_wick_low.toFixed(4)}</strong></div>
+              <div><span>Real Washout Support</span><strong style="color:#22D3EE;">$${item.real_support_low.toFixed(4)}</strong></div>
+              <div><span>Golden Zone [sup, +22%]</span><strong style="color:#34D399;">${item.buy_zone_display}</strong></div>
+            </div>
+            <div class="reason-box">
+              <strong>Live $${item.live_price.toFixed(4)} (+${item.dist_from_support_pct}% vs Support):</strong> ${item.timing_reason}
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span class="mono" style="font-size:11px; color:var(--text-muted);">LP Locked ${item.lp_locked_pct}% · Tax ${item.buy_sell_tax_pct}</span>
+              ${inZone
+                ? `<button class="btn btn-emerald" onclick="executeBscBuy('${item.symbol}', 300)">⚡ BSC DCA Buy $300 (${item.symbol})</button>`
+                : `<button class="btn" style="opacity:0.75;" onclick="executeBscBuy('${item.symbol}', 300)">📌 Place Pullback Limit Order</button>`
+              }
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Render Anti-Rug Sentinel Logs
+      const senEl = document.getElementById('sentinel-logs');
+      senEl.innerHTML = APP_STATE.contract_audit_logs.map(log => {
+        const ok = log.is_authentic_match;
+        return `
+          <div class="token-card ${ok ? 'highlight-green' : 'highlight-red'}" style="margin-bottom: 12px;">
+            <div class="token-top">
+              <div>
+                <span class="badge ${ok ? 'badge-emerald' : 'badge-crimson'}">${log.verdict}</span>
+                <strong style="margin-left:8px; font-size:14px;">${log.symbol} (${log.chain_name}) · Case ${log.case_id}</strong>
+              </div>
+              <span class="mono" style="font-size:11px; color:var(--text-muted);">${log.security_metrics.execution_gate}</span>
+            </div>
+            <p style="font-size:12.5px; margin-bottom:8px;">${log.message}</p>
+            <div class="metrics-row">
+              <div><span>Candidate Contract</span><strong class="mono" style="font-size:11px;">${log.candidate_contract}</strong></div>
+              <div><span>Official Registry CA</span><strong class="mono" style="font-size:11px; color:#34D399;">${log.official_contract}</strong></div>
+              <div><span>LP Lock / Tax Scan</span><strong>LP ${log.security_metrics.lp_locked_pct}% · ${log.security_metrics.buy_sell_tax_pct}</strong></div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Render AlphaRadar Macro-to-OnChain Chains
+      const macroEl = document.getElementById('macro-chains');
+      macroEl.innerHTML = APP_STATE.macro_evidence_chains.map(sig => `
+        <div class="token-card highlight-gold" style="margin-bottom: 14px;">
+          <div class="token-top">
+            <div>
+              <span class="badge badge-cyan">${sig.signal_id}</span>
+              <strong style="font-size:15px; margin-left:8px;">${sig.theme}</strong>
+            </div>
+            <span class="badge badge-emerald">Confidence ${(sig.confidence_score * 100).toFixed(0)}% · Odds Deviation +${sig.odds_deviation_pct}%</span>
+          </div>
+          <div class="metrics-row" style="grid-template-columns: repeat(2, 1fr);">
+            <div><span>Layer 1 · Macro / Policy Catalyst</span><strong>${sig.layer1_macro_event}</strong></div>
+            <div><span>Layer 2 · Tech Route & Moat</span><strong>${sig.layer2_tech_route}</strong></div>
+            <div><span>Layer 3 · Value-Chain Margin Split</span><strong>${sig.layer3_value_chain}</strong></div>
+            <div>
+              <span>Layer 4 · Mapped On-Chain Targets</span>
+              <strong>${sig.layer4_onchain_mapping.map(m => `${m.symbol} (${m.role})`).join(' · ')}</strong>
+            </div>
+          </div>
+          <div class="reason-box">
+            <strong>Zero-Hallucination Evidence Contract:</strong> Citation: <em>${sig.evidence_contract.primary_citation}</em> |
+            Window: ${sig.evidence_contract.freshness_window} | Counter-Thesis Risk: ${sig.evidence_contract.counter_thesis_risk}
+          </div>
+        </div>
+      `).join('');
+
+      // Render Optimization Grid Table
+      const optTable = document.getElementById('opt-grid-table');
+      optTable.innerHTML = `
+        <thead>
+          <tr>
+            <th>Strategy Configuration</th>
+            <th>Trades</th>
+            <th>Win Rate</th>
+            <th>2.5x Recovery</th>
+            <th>Final Equity ($10k)</th>
+            <th>Total Return</th>
+            <th>Max Drawdown</th>
+            <th>Sharpe</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${APP_STATE.optimization_grid.map(r => `
+            <tr class="${r.is_optimal ? 'optimal-row' : ''}">
+              <td>${r.name}</td>
+              <td>${r.trades}</td>
+              <td>${r.win_rate_pct}%</td>
+              <td>${r.principal_recovery_pct}%</td>
+              <td>$${r.final_equity_usd.toLocaleString()}</td>
+              <td style="color:${r.is_optimal ? '#34D399' : '#F3F6FC'};">+${r.total_return_pct}%</td>
+              <td style="color:${r.max_drawdown_pct > 50 ? '#F87171' : '#34D399'};">${r.max_drawdown_pct}%</td>
+              <td>${r.sharpe_ratio}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      `;
+
+      // Render Timing Window Table
+      const winTable = document.getElementById('timing-window-table');
+      winTable.innerHTML = `
+        <thead>
+          <tr>
+            <th>Post-Listing Entry Window</th>
+            <th>Sample Size</th>
+            <th>Avg Entry vs Open</th>
+            <th>Median Peak Multiple</th>
+            <th>Mean Peak Multiple</th>
+            <th>Hit >= 2x Rate</th>
+            <th>Empirical Verdict</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${APP_STATE.timing_windows.map(w => `
+            <tr class="${w.is_golden ? 'optimal-row' : ''}">
+              <td>${w.window_label}</td>
+              <td>${w.sample_count} tokens</td>
+              <td>${w.avg_entry_vs_open_pct}%</td>
+              <td>${w.median_peak_multiple}x</td>
+              <td>${w.mean_peak_multiple}x</td>
+              <td>${w.hit_rate_2x_pct}%</td>
+              <td>${w.verdict}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      `;
+
+      // Render Invariants
+      const invEl = document.getElementById('invariants-grid');
+      invEl.innerHTML = APP_STATE.safety_invariants.map(inv => `
+        <div class="token-card">
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+            <span class="badge badge-purple">${inv.id}</span>
+            <strong style="font-size:13px;">${inv.title}</strong>
+          </div>
+          <p style="font-size:12px; color:var(--text-muted);">${inv.rule}</p>
+        </div>
+      `).join('');
+
+      // Update KillSwitch KPI
+      const ksEl = document.getElementById('kpi-ks-status');
+      if (APP_STATE.killswitch_engaged) {
+        ksEl.textContent = 'KILLSWITCH HALTED';
+        ksEl.style.color = 'var(--accent-crimson)';
+      } else {
+        ksEl.textContent = '9 / 9 Active';
+        ksEl.style.color = 'var(--accent-emerald)';
+      }
+
+      // Render Telemetry
+      const telEl = document.getElementById('telemetry-list');
+      telEl.innerHTML = APP_STATE.telemetry_logs.map(t => `
+        <div class="log-item">
+          <div style="display:flex; justify-content:space-between;">
+            <strong style="color:#FBBF24;">${t.sponsor}</strong>
+            <span class="mono" style="color:var(--text-muted);">${t.timestamp}</span>
+          </div>
+          <div class="mono" style="font-size:11px; color:#34D399; margin-top:2px;">${t.endpoint} ➔ ${t.status}</div>
+          <pre>${JSON.stringify(t.detail, null, 2)}</pre>
+        </div>
+      `).join('');
+    }
+
+    async function loadState() {
+      const res = await fetch('/api/state');
+      APP_STATE = await res.json();
+      renderAll();
+    }
+
+    async function executeBscBuy(symbol, amount) {
+      const res = await fetch('/api/register-buy', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ symbol, invested_usd: amount })
+      });
+      const data = await res.json();
+      if (data.ok) {
+        APP_STATE.holding_positions = data.holding_positions;
+        APP_STATE.waiting_to_buy_funnel = data.waiting_to_buy_funnel;
+        APP_STATE.telemetry_logs = data.telemetry_logs;
+        renderAll();
+      }
+    }
+
+    async function trigger25xSurge(symbol) {
+      const res = await fetch('/api/trigger-25x-alert', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ symbol })
+      });
+      const data = await res.json();
+      if (data.ok) {
+        APP_STATE.holding_positions = data.holding_positions;
+        APP_STATE.telemetry_logs = data.telemetry_logs;
+        const banner = document.getElementById('p1-alert-banner');
+        banner.style.display = 'block';
+        banner.textContent = data.alert.action_instruction;
+        renderAll();
+      }
+    }
+
+    async function runContractCheck(symbol, candidateContract) {
+      const res = await fetch('/api/verify-contract', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ symbol, candidate_contract: candidateContract, chain_name: 'BSC' })
+      });
+      const data = await res.json();
+      if (data.ok) {
+        APP_STATE.contract_audit_logs = data.contract_audit_logs;
+        APP_STATE.telemetry_logs = data.telemetry_logs;
+        renderAll();
+      }
+    }
+
+    async function runMacroScan() {
+      const res = await fetch('/api/macro-scan', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          query: 'Verify Edge AI Compute (COAI/SHARE), DeSci Genomics (DNA), and BNB Tokenized Tech Equities (4STOCK)'
+        })
+      });
+      const data = await res.json();
+      if (data.ok) {
+        APP_STATE.macro_evidence_chains = data.macro_evidence_chains;
+        APP_STATE.telemetry_logs = data.telemetry_logs;
+        renderAll();
+      }
+    }
+
+    async function toggleKillSwitch() {
+      const res = await fetch('/api/killswitch', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ reason: 'Operator one-click emergency risk halt verification (INV-09)' })
+      });
+      const data = await res.json();
+      if (data.ok) {
+        APP_STATE.killswitch_engaged = data.killswitch_engaged;
+        APP_STATE.killswitch_reason = data.killswitch_reason;
+        APP_STATE.telemetry_logs = data.telemetry_logs;
+        renderAll();
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', loadState);
+  </script>
+</body>
+</html>
