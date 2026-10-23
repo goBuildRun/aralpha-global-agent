@@ -50,7 +50,7 @@ TIMING_WINDOW_MATRIX: List[Dict[str, Any]] = [
     {
         "window_id": "W1_T1h_Chase",
         "window_label": "T+1h Immediate Listing Chase (FOMO)",
-        "window_zh": "开盘首小时追高 (T+1h)",
+        "window_zh": " (T+1h)",
         "sample_count": 555,
         "avg_entry_vs_open_pct": 0.0,
         "median_peak_multiple": 1.50,
@@ -64,7 +64,7 @@ TIMING_WINDOW_MATRIX: List[Dict[str, Any]] = [
     {
         "window_id": "W2_T6h_Dump",
         "window_label": "T+6h Initial Airdrop Dump Phase",
-        "window_zh": "首波空投抛压期 (T+6h)",
+        "window_zh": " (T+6h)",
         "sample_count": 555,
         "avg_entry_vs_open_pct": -7.92,
         "median_peak_multiple": 1.65,
@@ -78,7 +78,7 @@ TIMING_WINDOW_MATRIX: List[Dict[str, Any]] = [
     {
         "window_id": "W3_Golden_Stabilize",
         "window_label": "T+12h ~ T+72h Golden Washout Support Zone [support, +22%]",
-        "window_zh": "黄金洗盘企稳买窗 (T+12h~72h · 剔除开盘插针)",
+        "window_zh": " (T+12h~72h)",
         "sample_count": 555,
         "avg_entry_vs_open_pct": -15.76,
         "median_peak_multiple": 2.03,
@@ -92,7 +92,7 @@ TIMING_WINDOW_MATRIX: List[Dict[str, Any]] = [
     {
         "window_id": "W4_T48h_Washout",
         "window_label": "T+48h Day-2 Secondary Support Test",
-        "window_zh": "次日黄金坑筑底窗 (T+48h)",
+        "window_zh": " (T+48h)",
         "sample_count": 555,
         "avg_entry_vs_open_pct": -12.23,
         "median_peak_multiple": 1.69,
@@ -106,7 +106,7 @@ TIMING_WINDOW_MATRIX: List[Dict[str, Any]] = [
     {
         "window_id": "W5_T168h_Week1",
         "window_label": "T+168h (Day 7) Late Confirmation Entry",
-        "window_zh": "首周确认窗 (T+168h)",
+        "window_zh": " (T+168h)",
         "sample_count": 555,
         "avg_entry_vs_open_pct": -13.56,
         "median_peak_multiple": 1.63,
@@ -351,7 +351,7 @@ def compute_wick_stripped_entry_assessment(
 
     if hours_since_listing < start_h:
         eligible_status = "WATCHING_LAUNCH"
-        status_badge = "Wait for T+12h Washout · 首波抛压观察"
+        status_badge = "Wait for T+12h Washout"
         recommended_buy_price = min(live_price, buy_zone_high)
         timing_reason = (
             f"Listed only {hours_since_listing:.1f}h ago (airdrop dump phase). "
@@ -360,7 +360,7 @@ def compute_wick_stripped_entry_assessment(
         )
     elif is_in_buy_zone:
         eligible_status = "BUY_WINDOW_ACTIVE"
-        status_badge = "IN GOLDEN BUY ZONE · 现价处于买区可买"
+        status_badge = "IN GOLDEN BUY ZONE · BUY WINDOW ACTIVE"
         recommended_buy_price = live_price
         timing_reason = (
             f"T+{int(hours_since_listing)}h Golden Window active: pulled back -{drawdown_from_high_pct:.0f}% from high, "
@@ -369,7 +369,7 @@ def compute_wick_stripped_entry_assessment(
         )
     else:
         eligible_status = "DO_NOT_CHASE_WAIT_PULLBACK"
-        status_badge = "ABOVE BUY ZONE · 现价偏高严禁追高"
+        status_badge = "ABOVE BUY ZONE"
         recommended_buy_price = buy_zone_high
         timing_reason = (
             f"Live price ${live_price:.4f} has bounced +{dist_from_support_pct:.1f}% above real support ${real_support_low:.4f} "
