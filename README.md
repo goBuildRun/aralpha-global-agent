@@ -4,8 +4,11 @@
 [![Backtest: 576 Tokens (+725.82% Return / 4.11% Max DD)](https://img.shields.io/badge/Empirical_Backtest-576_Tokens_(%2B725.82%25)-10B981)](#empirical-backtest-validation-576-tokens)
 [![Security: Fail-Closed Anti-Rug Sentinel](https://img.shields.io/badge/Web3_Security-Fail--Closed_Anti--Rug_Sentinel-EF4444)](#anti-rug-sentinel--web3-for-social-good)
 [![Ecosystem: BNB Chain | Tokenized Stocks | Nebius NVIDIA | Tavily](https://img.shields.io/badge/Ecosystem-BNB_Chain_%7C_RWA_Stocks_%7C_Nebius_NVIDIA_%7C_Tavily-F59E0B)](#ecosystem--sponsor-integrations)
+[![Live Web Demo: Zero-Login Interactive Workbench](https://img.shields.io/badge/🚀%20Live%20Web%20Demo-Zero--Login%20Interactive%20Workbench-2563EB)](https://htmlpreview.github.io/?https://github.com/goBuildRun/aralpha-global-agent/blob/main/index.html)
 [![Demo Video: YouTube 1080p](https://img.shields.io/badge/🎥%20Watch%20Demo%20Video-YouTube%201080p-red)](https://youtu.be/coP3PXuOTxg)
 
+> 🚀 **Try the Live Interactive Web Workbench (100% English, Public Zero-Login Browser Demo)**: **[Launch AlphaNexus Live Workbench](https://htmlpreview.github.io/?https://github.com/goBuildRun/aralpha-global-agent/blob/main/index.html)** *(or run locally via `python3 server.py --port 8766`)*
+>
 > 🎬 **Watch the 1m56s 1080p English-Narrated Demo Video**: **[https://youtu.be/coP3PXuOTxg](https://youtu.be/coP3PXuOTxg)**
 > - **`0:00 - 0:28` ⚡ The 30-Second Aha Moment**: Stripping `DNA / NeoSoul`'s `$0.0400` 1-second opening fake wick to anchor true washout support (`$0.1750`) + locking a **$2.5\times$ Principal Recovery ("Free-Ride")** schedule (`Golden Window Workbench`).
 > - **`0:29 - 0:58` 🛡️ Fail-Closed Anti-Rug Sentinel (`INV-06`)**: Intercepting a counterfeit `DNA` honeypot clone (`0xdeadbeef...fafa` with 100% sell tax) pre-trade and dispatching an automated abuse report (`SCAM-CA-ALPHA_1247`).
