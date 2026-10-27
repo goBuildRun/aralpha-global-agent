@@ -130,6 +130,30 @@ Judges and traders value explicit failure boundaries over marketing hype. Below 
 
 ---
 
+## 🟩 Bitcoin Cash CashTokens Read-Only Sentinel (`bch_cashtokens.py`)
+
+A stdlib-only, **read-only** module (never signs, never broadcasts, no keys) that applies the AlphaNexus anti-counterfeit idea to CashTokens, where token identity is the 32-byte **category id**, not the ticker.
+
+| Component | What it does | LLM? |
+| :--- | :--- | :--- |
+| `ElectrumCashClient` | Minimal Electrum Cash (Fulcrum) JSON-RPC over TLS: chain tip + `blockchain.address.listunspent <addr> tokens_only` returning real `token_data` | No |
+| `load_bcmr_registry` | Parses a Bitcoin Cash Metadata Registry (BCMR) JSON into a trusted `category → symbol/name` map (latest snapshot wins) | No |
+| `assess_cashtoken` R1–R5 | R1 category format · R2 same/confusable ticker or name with a different category → `BLOCK` · R3 not in trusted registry → `FAIL_CLOSED_REVIEW` · R4 live minting-capability NFT → `WARN` · R5 top-10 holder share ≥ 60% `WARN` / ≥ 90% `BLOCK` | No |
+
+```bash
+python3 server.py --port 8766
+curl -X POST localhost:8766/api/bch/assess -d '{"candidate":{"category":"ffff...ffff","symbol":"DUSD"}}'
+curl -X POST localhost:8766/api/bch/live-token-utxos -d '{"address":"bitcoincash:qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqfnhks603"}'   # real mainnet read
+```
+
+**Known limitations**
+- `fixtures/bcmr_sample.json` is a **synthetic** registry with placeholder categories; set `BCMR_REGISTRY_PATH` to a registry you actually trust. The verdict is only as good as that registry.
+- R5 needs a holder snapshot. Electrum queries are per-address, so a full holder list requires an indexer (e.g. Chaingraph) — not included.
+- Community Fulcrum servers often use self-signed TLS certs; the client disables cert verification because it only reads public data. Don't reuse it for anything that sends secrets.
+- No trading or DEX execution on BCH is implemented.
+
+---
+
 ## 🛠️ What Was Built & Updated During the Hackathon Submission Period
 
 - Packaged the standalone, zero-proprietary-leak **AlphaNexus Global Agent Adapter** (`server.py`, `integrations.py`, 4-panel interactive quantitative & security workbench, and 4 `pytest` verification suites).

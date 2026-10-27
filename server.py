@@ -24,6 +24,18 @@ from integrations import (
 ENGINE = AlphaNexusHackathonEngine()
 STATIC_DIR = Path(__file__).resolve().parent / "static"
 
+import os  # noqa: E402
+
+import bch_cashtokens as bch  # noqa: E402
+
+# Trusted BCMR registry: set BCMR_REGISTRY_PATH to a real registry you trust.
+# The bundled file is a clearly-labelled synthetic sample for demos/tests only.
+BCMR_PATH = Path(os.environ.get("BCMR_REGISTRY_PATH") or Path(__file__).resolve().parent / "fixtures" / "bcmr_sample.json")
+
+
+def _load_registry() -> Dict[str, Any]:
+    return bch.load_bcmr_registry(json.loads(BCMR_PATH.read_text(encoding="utf-8")))
+
 
 def handle_api_request(method: str, path: str, body: Dict[str, Any]) -> Dict[str, Any]:
     if method == "GET" and path == "/api/state":
@@ -115,6 +127,27 @@ def handle_api_request(method: str, path: str, body: Dict[str, Any]) -> Dict[str
             "killswitch_reason": ENGINE.killswitch_reason,
             "telemetry_logs": ENGINE.telemetry_logs,
         }
+
+    if method == "POST" and path == "/api/bch/assess":
+        candidate = body.get("candidate") or {}
+        snapshot = body.get("snapshot")
+        return {"ok": True, "registry_source": str(BCMR_PATH.name), "assessment": bch.assess_cashtoken(candidate, _load_registry(), snapshot)}
+
+    if method == "POST" and path == "/api/bch/live-token-utxos":
+        # Real read-only query against a public Fulcrum (Electrum Cash) server.
+        address = str(body.get("address") or "")
+        if not address.startswith(("bitcoincash:", "bchtest:")):
+            return {"ok": False, "error": "address must be a cashaddr (bitcoincash:...)"}
+        errors = []
+        for host, port in bch.DEFAULT_FULCRUM_SERVERS:
+            try:
+                with bch.ElectrumCashClient(host, port, timeout=8) as c:
+                    tip = c.chain_tip()
+                    utxos = c.token_utxos(address)
+                return {"ok": True, "server": host, "tip_height": tip.get("height"), "token_utxos": utxos}
+            except Exception as e:  # try next server
+                errors.append(f"{host}: {type(e).__name__}")
+        return {"ok": False, "error": "all Fulcrum servers failed", "details": errors}
 
     return {"ok": False, "error": f"Unknown endpoint {method} {path}"}
 

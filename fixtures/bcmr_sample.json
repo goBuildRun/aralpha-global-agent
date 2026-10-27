@@ -1,0 +1,25 @@
+{
+  "$schema": "https://cashtokens.org/bcmr-v2.schema.json",
+  "_note": "SYNTHETIC SAMPLE for demos/tests only. Categories below are made-up placeholders, not real tokens. Point BCMR_REGISTRY_PATH at a registry you actually trust for real use.",
+  "version": {"major": 0, "minor": 1, "patch": 0},
+  "latestRevision": "2026-10-27T00:00:00.000Z",
+  "registryIdentity": {"name": "AlphaNexus demo registry"},
+  "identities": {
+    "1111111111111111111111111111111111111111111111111111111111111111": {
+      "2026-01-01T00:00:00.000Z": {
+        "name": "Demo Stable Dollar",
+        "token": {"category": "1111111111111111111111111111111111111111111111111111111111111111", "symbol": "DUSD", "decimals": 2}
+      }
+    },
+    "2222222222222222222222222222222222222222222222222222222222222222": {
+      "2026-01-01T00:00:00.000Z": {
+        "name": "Demo Community Token",
+        "token": {"category": "2222222222222222222222222222222222222222222222222222222222222222", "symbol": "DCT", "decimals": 8}
+      },
+      "2026-06-01T00:00:00.000Z": {
+        "name": "Demo Community Token v2",
+        "token": {"category": "2222222222222222222222222222222222222222222222222222222222222222", "symbol": "DCT", "decimals": 8}
+      }
+    }
+  }
+}
