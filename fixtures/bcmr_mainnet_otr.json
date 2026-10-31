@@ -68,6 +68,36 @@
         }
       }
     },
+    "d17b8642b628251fbcdda3cdc5688977f66375a6cfcd9c85836f8f1c9f8ddee7": {
+      "2026-10-27T00:00:00.000Z": {
+        "name": "BCH BLAZE 2026 TokenHunt #1: Paytaca Pioneer",
+        "token": {
+          "category": "d17b8642b628251fbcdda3cdc5688977f66375a6cfcd9c85836f8f1c9f8ddee7",
+          "symbol": "BLAZE2026-PAYTACA-PIONEER",
+          "decimals": 0
+        }
+      }
+    },
+    "676b8d5cef572179e4633124eb0a873507b525c3053a7461518aafa90d076dd6": {
+      "2026-10-31T00:00:00.000Z": {
+        "name": "BCH BLAZE 2026 TokenHunt #2: Template Titan (XO Workshop)",
+        "token": {
+          "category": "676b8d5cef572179e4633124eb0a873507b525c3053a7461518aafa90d076dd6",
+          "symbol": "BLAZE2026-TEMPLATE-TITAN",
+          "decimals": 0
+        }
+      }
+    },
+    "cc080d0bf27a2b6c8d006a0f1f0c1695b485ed75caff5264b90c68e63f232ff4": {
+      "2026-10-10T00:00:00.000Z": {
+        "name": "BCH BLAZE TokenHunt Bonus #10: Trailblazer",
+        "token": {
+          "category": "cc080d0bf27a2b6c8d006a0f1f0c1695b485ed75caff5264b90c68e63f232ff4",
+          "symbol": "BLAZE-TRAILBLAZER",
+          "decimals": 0
+        }
+      }
+    },
     "1111111111111111111111111111111111111111111111111111111111111111": {
       "2026-01-01T00:00:00.000Z": {
         "name": "Demo Stable Dollar",
