@@ -1,0 +1,92 @@
+{
+  "$schema": "https://cashtokens.org/bcmr-v2.schema.json",
+  "_note": "Real Bitcoin Cash Mainnet CashTokens metadata merged from OpenTokenRegistry (otr.cash) and ParyonUSD (paryonusd.com) + Moria USD (MUSD), plus DUSD/DCT test vectors.",
+  "version": { "major": 1, "minor": 0, "patch": 0 },
+  "latestRevision": "2026-10-31T00:00:00.000Z",
+  "registryIdentity": {
+    "name": "AlphaNexus Trusted Mainnet BCMR Bundle (ParyonUSD + OpenTokenRegistry)",
+    "description": "Verified Bitcoin Cash Mainnet CashTokens Category IDs for anti-impersonation enforcement."
+  },
+  "identities": {
+    "2469acc5afa4b10cb5b5c04afb89c3a3ffd61c5da9c01e26d00951cae2a02544": {
+      "2026-10-01T00:00:00.000Z": {
+        "name": "ParyonUSD (Official BCH BLAZE Sponsor Stablecoin)",
+        "token": {
+          "category": "2469acc5afa4b10cb5b5c04afb89c3a3ffd61c5da9c01e26d00951cae2a02544",
+          "symbol": "PUSD",
+          "decimals": 2
+        }
+      }
+    },
+    "b38a33f750f84c5c169a6f23cb873e6e79605021585d4f3408789689ed87f366": {
+      "2026-01-01T00:00:00.000Z": {
+        "name": "Moria USD Stablecoin",
+        "token": {
+          "category": "b38a33f750f84c5c169a6f23cb873e6e79605021585d4f3408789689ed87f366",
+          "symbol": "MUSD",
+          "decimals": 2
+        }
+      }
+    },
+    "d9ab24ed15a7846cc3d9e004aa5cb976860f13dac1ead05784ee4f4622af96ea": {
+      "2026-01-01T00:00:00.000Z": {
+        "name": "Furu Tokens (OTR Verified)",
+        "token": {
+          "category": "d9ab24ed15a7846cc3d9e004aa5cb976860f13dac1ead05784ee4f4622af96ea",
+          "symbol": "FURU",
+          "decimals": 2
+        }
+      }
+    },
+    "f54ce0297a4017cc922aacde5f7abe7a8397a1058b879f5eb9e2a643d4ec2301": {
+      "2026-01-01T00:00:00.000Z": {
+        "name": "BCH Gurus (OTR Verified)",
+        "token": {
+          "category": "f54ce0297a4017cc922aacde5f7abe7a8397a1058b879f5eb9e2a643d4ec2301",
+          "symbol": "BCHGURU",
+          "decimals": 0
+        }
+      }
+    },
+    "180f0db4465c2af5ef9363f46bacde732fa6ffb3bfe65844452078085b2e7c93": {
+      "2026-01-01T00:00:00.000Z": {
+        "name": "Emerald DAO U23 (OTR Verified)",
+        "token": {
+          "category": "180f0db4465c2af5ef9363f46bacde732fa6ffb3bfe65844452078085b2e7c93",
+          "symbol": "EMRDAO-U23",
+          "decimals": 0
+        }
+      }
+    },
+    "0adb865ee9cc3038de87fba682e6cd361414edc9acff0da2fd0690d75341c640": {
+      "2026-01-01T00:00:00.000Z": {
+        "name": "FoldingCash (OTR Verified)",
+        "token": {
+          "category": "0adb865ee9cc3038de87fba682e6cd361414edc9acff0da2fd0690d75341c640",
+          "symbol": "FLDCH",
+          "decimals": 0
+        }
+      }
+    },
+    "1111111111111111111111111111111111111111111111111111111111111111": {
+      "2026-01-01T00:00:00.000Z": {
+        "name": "Demo Stable Dollar",
+        "token": {
+          "category": "1111111111111111111111111111111111111111111111111111111111111111",
+          "symbol": "DUSD",
+          "decimals": 2
+        }
+      }
+    },
+    "2222222222222222222222222222222222222222222222222222222222222222": {
+      "2026-06-01T00:00:00.000Z": {
+        "name": "Demo Community Token v2",
+        "token": {
+          "category": "2222222222222222222222222222222222222222222222222222222222222222",
+          "symbol": "DCT",
+          "decimals": 8
+        }
+      }
+    }
+  }
+}

@@ -23,6 +23,24 @@
 
 ---
 
+## 🟢 BCH BLAZE 2026 — Bitcoin Cash (`CashTokens`) Anti-Impersonation Sentinel & Mainnet Workbench
+
+[![BCH BLAZE 2026: Mainnet Track](https://img.shields.io/badge/BCH_BLAZE_2026-Mainnet_Track_%26_Community_Choice-10B981)](https://gobuildrun.github.io/aralpha-global-agent/)
+[![Widget Factory Deck](https://img.shields.io/badge/📊_Widget_Factory_Deck-View_Presentation-06B6D4)](https://gobuildrun.github.io/aralpha-global-agent/widget-factory.html)
+
+- 🚀 **Live Interactive Web Demo (GitHub Pages)**: **[https://gobuildrun.github.io/aralpha-global-agent/](https://gobuildrun.github.io/aralpha-global-agent/)** *(Click the **`🟢 BCH BLAZE 2026 (CashTokens & Mainnet)`** track button or Tab 5)*
+- 📊 **Official "Widget Factory" Template Presentation**: **[https://gobuildrun.github.io/aralpha-global-agent/widget-factory.html](https://gobuildrun.github.io/aralpha-global-agent/widget-factory.html)**
+- 🔥 **`EMBER2026` Community Choice Token-Aware CashAddr**: `bitcoincash:zqtdsruywey7scdzysllxzvmsjj58x386uuf64z7zg` *(Standard P2PKH CashAddr: `bitcoincash:qqtdsruywey7scdzysllxzvmsjj58x386umrftvcam`)*
+- 🔎 **Pre-Existing Project & New BCH BLAZE 2026 Scope Disclosure**:
+  - **Baseline Pre-Hackathon Repository & Demo**: [`goBuildRun/aralpha-global-agent`](https://github.com/goBuildRun/aralpha-global-agent) (EVM/BSC Golden Window & Anti-Rug Sentinel baseline).
+  - **100% New Built for BCH BLAZE 2026**:
+    1. **[`bch_cashtokens.py`](./bch_cashtokens.py)**: Deterministic 5-rule (`R1–R5`) Bitcoin Cash **CashTokens Anti-Impersonation & Minting-Risk Sentinel** (`R1_INVALID_CATEGORY_HEX`, `R2_SYMBOL_IMPERSONATION` with homograph detection e.g. `PU5D` vs `PUSD`, `R3_UNVERIFIED_CATEGORY`, `R4_ACTIVE_MINTING_CAPABILITY` for `minting` NFT batons, `R5_HIGH_HOLDER_CONCENTRATION` $\ge 80\%$) + live **Fulcrum Electrum Cash TLS (`bch.imaginary.cash:50002`)** `blockchain.address.listunspent` `token_data` UTXO reader.
+    2. **[`fixtures/bcmr_mainnet_otr.json`](./fixtures/bcmr_mainnet_otr.json)**: Verified **BCMR v2** registry bundle indexing official **ParyonUSD (`PUSD`, category `2469acc5...2544`)**, **Moria USD (`MUSD`)**, and **OpenTokenRegistry (`otr.cash`)** tokens (`FURU`, `BCHGURU`, `EMRDAO-U23`, `FLDCH`).
+    3. **Interactive CashTokens Workbench & Mainnet Transaction Dispatcher (`Tab 5` in [`index.html`](./index.html))**: Top-of-page BCH BLAZE 2026 compliance banner, one-click BCMR v2 vs. fake `PUSD` clone auditing, live Fulcrum mainnet UTXO table, and **WizardConnect / XO / WalletConnect v2 (`bch:bitcoincash`)** wallet pairing + mainnet `OP_RETURN` security attestation & `EMBER2026` transaction dispatcher.
+    4. **Automated Test Suite ([`tests/test_bch_cashtokens.py`](./tests/test_bch_cashtokens.py))**: 10 unit tests covering BCMR v2 resolution, homograph impersonation blocking, active minting NFT capability warnings, concentration risk, and HTTP endpoints (`/api/bch/assess`, `/api/bch/live-token-utxos`).
+
+---
+
 ## 🌟 Core Technical Differentiators (Why Judges Love AlphaNexus)
 
 ### 1. Wick-Resistant Post-Listing Entry Pricing (`compute_real_kline_entry_assessment`)

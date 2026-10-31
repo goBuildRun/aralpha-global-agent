@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AlphaNexus CashTokens Sentinel — BCH BLAZE 2026 Widget Factory Presentation</title>
+  <style>
+    :root {
+      --bg: #080d16;
+      --card: #111827;
+      --border: #1e293b;
+      --bch-green: #0ac18e;
+      --blaze-red: #f43f5e;
+      --gold: #f59e0b;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(circle at top right, #0f2922 0%, var(--bg) 60%);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+      min-height: 100vh;
+      padding: 28px 24px 64px;
+    }
+    .container { max-width: 1040px; margin: 0 auto; }
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .badge {
+      background: rgba(10, 193, 142, 0.16);
+      color: var(--bch-green);
+      border: 1px solid rgba(10, 193, 142, 0.45);
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .btn {
+      background: linear-gradient(135deg, var(--bch-green), #059669);
+      color: #04130e;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 13px;
+      display: inline-block;
+    }
+    .slide {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--bch-green);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 22px;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+    }
+    .slide-num {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--bch-green);
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .slide h2 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+    .slide p, .slide li {
+      font-size: 14.5px;
+      line-height: 1.6;
+      color: #cbd5e1;
+    }
+    .slide ul { padding-left: 20px; margin-top: 8px; }
+    .slide li { margin-bottom: 6px; }
+    .mono {
+      font-family: "JetBrains Mono", "SF Mono", monospace;
+      background: rgba(15, 23, 42, 0.85);
+      padding: 2px 7px;
+      border-radius: 5px;
+      color: #38bdf8;
+      font-size: 12.5px;
+      word-break: break-all;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+      margin-top: 14px;
+    }
+    .box {
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="top-nav">
+      <div>
+        <span class="badge">BCH BLAZE 2026 · Official "Widget Factory" Presentation Deck</span>
+        <h1 style="font-size: 20px; margin-top: 8px;">AlphaNexus CashTokens Sentinel: Anti-Impersonation & BCMR Guard for Bitcoin Cash</h1>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <a class="btn" href="./index.html">⚡ Open Live Interactive Workbench</a>
+        <a class="btn" style="background: #1e293b; color: #fff;" href="https://github.com/goBuildRun/aralpha-global-agent" target="_blank">GitHub Repo ↗</a>
+      </div>
+    </div>
+
+    <!-- SLIDE 1: TITLE & TEAM -->
+    <div class="slide">
+      <div class="slide-num">Slide 1 / 6 · Title & Team (Widget Factory Template)</div>
+      <h2>AlphaNexus CashTokens Sentinel!</h2>
+      <p><strong>Automatically block counterfeit CashTokens & verify 32-byte BCMR Category IDs in milliseconds before any wallet or bot signs.</strong></p>
+      <div class="grid-2">
+        <div class="box">
+          <strong>Team & Builder</strong><br/>
+          BuildRun Agent Engineering Lab — Arone Zhang (<span class="mono">@aronezhang</span>)<br/>
+          Live App: <a href="https://gobuildrun.github.io/aralpha-global-agent/" style="color: var(--bch-green);">gobuildrun.github.io/aralpha-global-agent</a>
+        </div>
+        <div class="box">
+          <strong>Source Code & EMBER2026 Token Address</strong><br/>
+          Repo: <a href="https://github.com/goBuildRun/aralpha-global-agent" style="color: var(--bch-green);">github.com/goBuildRun/aralpha-global-agent</a><br/>
+          CashTokens (<span class="mono">EMBER2026</span> / <span class="mono">PUSD</span>):<br/>
+          <span class="mono">bitcoincash:zqtdsruywey7scdzysllxzvmsjj58x386uuf64z7zg</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: THE STORY -->
+    <div class="slide">
+      <div class="slide-num">Slide 2 / 6 · The Story of AlphaNexus CashTokens Sentinel</div>
+      <h2>Why Manual 64-Hex Category Checks Fail Under Stress</h2>
+      <p>
+        While reading the official homepage of <strong>ParyonUSD (PUSD)</strong> — the stablecoin sponsor of BCH BLAZE 2026 — it hit us:
+        ParyonUSD explicitly warns every user on its front page:
+        <em>"Always confirm this category ID (<span class="mono">2469acc5afa4b10cb5b5c04afb89c3a3ffd61c5da9c01e26d00951cae2a02544</span>) matches the token in your wallet or on a DEX before sending or trading."</em>
+      </p>
+      <p style="margin-top: 10px;">
+        On Bitcoin Cash CashTokens, a token's true identity is its 32-byte genesis category ID — anyone can mint a brand-new category with the exact same ticker (<span class="mono">PUSD</span>, <span class="mono">MUSD</span>, <span class="mono">FURU</span>) or homograph (<span class="mono">PU5D</span>). Asking retail users or autonomous trading bots to eyeball 64 hex characters before every swap is a recipe for costly mistakes. So we built an automated, fail-closed CashTokens Sentinel!
+      </p>
+    </div>
+
+    <!-- SLIDE 3: BENEFITS -->
+    <div class="slide">
+      <div class="slide-num">Slide 3 / 6 · Benefits of AlphaNexus CashTokens Sentinel</div>
+      <h2>5 Deterministic Rules — Zero LLM Hallucinations</h2>
+      <ul>
+        <li><strong>Instant BCMR v2 Verification</strong>: Cross-checks candidate tokens against trusted Bitcoin Cash Metadata Registries (<strong>ParyonUSD</strong> + <strong>OpenTokenRegistry otr.cash</strong>).</li>
+        <li><strong>Rule R1 (32-Byte Hex Integrity)</strong>: Rejects malformed or non-standard Category IDs immediately (<span class="mono">BLOCK</span>).</li>
+        <li><strong>Rule R2 (Ticker & Homograph Anti-Impersonation)</strong>: Normalizes confusable characters (<span class="mono">0/O, 1/l, 5/S, $/S</span>). Any token claiming <span class="mono">PUSD</span> or <span class="mono">PU5D</span> with a different category ID is intercepted pre-trade (<span class="mono">BLOCK</span>).</li>
+        <li><strong>Rule R3 (Fail-Closed Unknown Category Gate)</strong>: Unregistered categories trigger <span class="mono">FAIL_CLOSED_REVIEW</span> — autonomous bots are forbidden from auto-buying until human approval.</li>
+        <li><strong>Rules R4 & R5 (Live Minting NFT & Whale Concentration)</strong>: Detects active <span class="mono">minting</span> capability NFTs (supply inflation risk) and >60% / >90% top-10 holder concentration from UTXO snapshots.</li>
+      </ul>
+    </div>
+
+    <!-- SLIDE 4: BCH USAGE -->
+    <div class="slide">
+      <div class="slide-num">Slide 4 / 6 · BCH Usage & Mainnet Capabilities</div>
+      <h2>How We Use Bitcoin Cash Mainnet, Fulcrum & Wallet Connection</h2>
+      <ul>
+        <li><strong>Live Fulcrum Electrum Cash TLS Client (<span class="mono">bch_cashtokens.py</span>)</strong>: Connects directly to public BCH Fulcrum servers (<span class="mono">bch.imaginary.cash:50002</span>) via JSON-RPC over TLS to query <span class="mono">blockchain.headers.subscribe</span> and <span class="mono">blockchain.address.listunspent &lt;cashaddr&gt; tokens_only</span>.</li>
+        <li><strong>WizardConnect / WalletConnect v2 (<span class="mono">bch:bitcoincash</span>) & XO / Cashonize / Paytaca Pairing</strong>: Built-in BCH wallet connector supporting injected BCH providers, WalletConnect v2 session pairing, and BIP-21 CashAddr URI signing.</li>
+        <li><strong>Mainnet BCH Transaction & On-Chain <span class="mono">OP_RETURN</span> Security Attestation</strong>: Users and judges can trigger a real Bitcoin Cash mainnet transaction from the workbench — either broadcasting an on-chain <span class="mono">OP_RETURN</span> SHA-256 security audit receipt or sending a micro-BCH / <span class="mono">EMBER2026</span> CashTokens transaction.</li>
+      </ul>
+    </div>
+
+    <!-- SLIDE 5: PRE-EXISTING VS NEW WORK & VISION -->
+    <div class="slide">
+      <div class="slide-num">Slide 5 / 6 · Transparency (Pre-Existing vs. New BCH BLAZE Work) & Vision</div>
+      <h2>What Existed Before vs. What Was Built for BCH BLAZE 2026</h2>
+      <div class="grid-2">
+        <div class="box">
+          <strong style="color: var(--gold);">Before BCH BLAZE (Baseline Repo & Demo)</strong>
+          <ul>
+            <li>EVM / BNB Chain Golden Window workbench & GoPlus contract checker</li>
+            <li>Baseline Commit: <a href="https://github.com/goBuildRun/aralpha-global-agent/tree/aa44f77" target="_blank" style="color: #38bdf8;">commit aa44f77</a></li>
+            <li>Pre-BLAZE Video Demo: <a href="https://youtu.be/coP3PXuOTxg" target="_blank" style="color: #38bdf8;">youtu.be/coP3PXuOTxg</a></li>
+          </ul>
+        </div>
+        <div class="box">
+          <strong style="color: var(--bch-green);">New Built for BCH BLAZE 2026</strong>
+          <ul>
+            <li><span class="mono">bch_cashtokens.py</span>: Zero-dependency Fulcrum TLS JSON-RPC client, BCMR v2 parser, and R1–R5 CashTokens rule engine</li>
+            <li><span class="mono">fixtures/bcmr_mainnet_otr.json</span>: Real Mainnet ParyonUSD (<span class="mono">PUSD</span>) + OpenTokenRegistry (<span class="mono">FURU</span>, <span class="mono">BCHGURU</span>, <span class="mono">MUSD</span>) bundle</li>
+            <li>Interactive BCH CashTokens Sentinel Workbench Tab + WizardConnect/WalletConnect BCH Wallet & Mainnet Tx Builder</li>
+          </ul>
+        </div>
+      </div>
+      <p style="margin-top: 14px;">
+        <strong>The Vision:</strong> Embed AlphaNexus CashTokens Sentinel into every Bitcoin Cash DEX (Cauldron), wallet (Paytaca, Selene, Cashonize), and AI trading agent so zero BCH users ever fall victim to a counterfeit ticker again!
+      </p>
+    </div>
+
+    <!-- SLIDE 6: THANK YOU -->
+    <div class="slide" style="text-align: center; border-left-color: var(--gold);">
+      <div class="slide-num">Slide 6 / 6 · Thank You!</div>
+      <h2>Try the Live Bitcoin Cash CashTokens Sentinel Now!</h2>
+      <p style="margin-bottom: 16px;">Click below to test real mainnet <span class="mono">PUSD</span> verification, counterfeit <span class="mono">PU5D</span> interception, live Fulcrum UTXO inspection, and BCH Mainnet transactions.</p>
+      <a class="btn" href="./index.html" style="font-size: 15px; padding: 12px 24px;">🚀 Launch Interactive BCH Sentinel Workbench</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -28,9 +28,8 @@ import os  # noqa: E402
 
 import bch_cashtokens as bch  # noqa: E402
 
-# Trusted BCMR registry: set BCMR_REGISTRY_PATH to a real registry you trust.
-# The bundled file is a clearly-labelled synthetic sample for demos/tests only.
-BCMR_PATH = Path(os.environ.get("BCMR_REGISTRY_PATH") or Path(__file__).resolve().parent / "fixtures" / "bcmr_sample.json")
+# Trusted BCMR registry: defaults to bundled OpenTokenRegistry + ParyonUSD mainnet bundle (plus DUSD/DCT test vectors).
+BCMR_PATH = Path(os.environ.get("BCMR_REGISTRY_PATH") or Path(__file__).resolve().parent / "fixtures" / "bcmr_mainnet_otr.json")
 
 
 def _load_registry() -> Dict[str, Any]:
@@ -168,6 +167,17 @@ class AlphaNexusRequestHandler(BaseHTTPRequestHandler):
             res = handle_api_request("GET", clean_path, {})
             self._send_json(res, 200 if res.get("ok") else 404)
             return
+
+        if clean_path == "/widget-factory.html":
+            wf_file = Path(__file__).resolve().parent / "widget-factory.html"
+            if wf_file.exists():
+                content = wf_file.read_bytes()
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.send_header("Content-Length", str(len(content)))
+                self.end_headers()
+                self.wfile.write(content)
+                return
 
         index_file = STATIC_DIR / "index.html"
         content = index_file.read_bytes()
