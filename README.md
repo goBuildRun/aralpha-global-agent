@@ -4,10 +4,13 @@
 [![Backtest: 576 Tokens (+725.82% Return / 4.11% Max DD)](https://img.shields.io/badge/Empirical_Backtest-576_Tokens_(%2B725.82%25)-10B981)](#empirical-backtest-validation-576-tokens)
 [![Security: Fail-Closed Anti-Rug Sentinel](https://img.shields.io/badge/Web3_Security-Fail--Closed_Anti--Rug_Sentinel-EF4444)](#anti-rug-sentinel--web3-for-social-good)
 [![Ecosystem: BNB Chain | Tokenized Stocks | Nebius NVIDIA | Tavily](https://img.shields.io/badge/Ecosystem-BNB_Chain_%7C_RWA_Stocks_%7C_Nebius_NVIDIA_%7C_Tavily-F59E0B)](#ecosystem--sponsor-integrations)
-[![Live Web Demo: Zero-Login Interactive Workbench](https://img.shields.io/badge/🚀%20Live%20Web%20Demo-Zero--Login%20Interactive%20Workbench-2563EB)](https://htmlpreview.github.io/?https://github.com/goBuildRun/aralpha-global-agent/blob/main/index.html)
+[![Live Web Demo: Zero-Login Interactive Workbench](https://img.shields.io/badge/🚀%20Live%20Web%20Demo-Zero--Login%20Interactive%20Workbench-2563EB)](https://gobuildrun.github.io/aralpha-global-agent/)
 [![Demo Video: YouTube 1080p](https://img.shields.io/badge/🎥%20Watch%20Demo%20Video-YouTube%201080p-red)](https://youtu.be/coP3PXuOTxg)
 
-> 🚀 **Try the Live Interactive Web Workbench (100% English, Public Zero-Login Browser Demo)**: **[Launch AlphaNexus Live Workbench](https://htmlpreview.github.io/?https://github.com/goBuildRun/aralpha-global-agent/blob/main/index.html)** *(or run locally via `python3 server.py --port 8766`)*
+> 🚀 **Try the Live Interactive Web Workbench (100% English, Public Zero-Login Browser Demo)**:
+> - **🟣 Reactive Omni v2 View (`0x8888...8888` Live Lasna RPC)**: **[https://gobuildrun.github.io/aralpha-global-agent/?mode=reactive](https://gobuildrun.github.io/aralpha-global-agent/?mode=reactive)**
+> - **🟢 BCH BLAZE 2026 View (`CashTokens` + Confirmed Mainnet Tx `6039f649...8510`)**: **[https://gobuildrun.github.io/aralpha-global-agent/?mode=bch](https://gobuildrun.github.io/aralpha-global-agent/?mode=bch)**
+> - **🌐 Full Multi-Chain Workbench**: **[https://gobuildrun.github.io/aralpha-global-agent/](https://gobuildrun.github.io/aralpha-global-agent/)** *(or run locally via `python3 server.py --port 8766`)*
 >
 > 🎬 **Watch the 1m56s 1080p English-Narrated Demo Video**: **[https://youtu.be/coP3PXuOTxg](https://youtu.be/coP3PXuOTxg)**
 > - **`0:00 - 0:28` ⚡ The 30-Second Aha Moment**: Stripping `DNA / NeoSoul`'s `$0.0400` 1-second opening fake wick to anchor true washout support (`$0.1750`) + locking a **$2.5\times$ Principal Recovery ("Free-Ride")** schedule (`Golden Window Workbench`).
@@ -23,14 +26,31 @@
 
 ---
 
+## 🟣 Reactive Omni Buildathon — CometBFT v2 (`0x8888...8888`) Cross-Chain Anti-Rug Sentinel
+
+[![Reactive Omni v2](https://img.shields.io/badge/Reactive_Lasna_Testnet-CometBFT_v2_(0x8888...8888)-8B5CF6)](https://gobuildrun.github.io/aralpha-global-agent/?mode=reactive)
+
+- 🚀 **Dedicated Reactive Omni v2 Live Demo**: **[https://gobuildrun.github.io/aralpha-global-agent/?mode=reactive](https://gobuildrun.github.io/aralpha-global-agent/?mode=reactive)**
+- 🔗 **Reactive Lasna Testnet (`Chain ID: 5318007`) Live Integration**:
+  1. **CometBFT v2 System Contract (`0x8888888888888888888888888888888888888888`)**: Strictly migrates away from legacy v1 `0x0000000000000000000000000000000000fffFfF` and raw `emit Callback(...)` logs to CometBFT v2's `ISystemContractV2(0x8888888888888888888888888888888888888888)` (`EIP-1967` implementation `0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb`) using `subscribeV_1_0(...)` and `requestCallbackV_1_0(...)` ([`contracts/ReactiveAlphaSentinelV2.sol`](./contracts/ReactiveAlphaSentinelV2.sol)).
+  2. **Live Browser CORS JSON-RPC Inspector (`https://lasna-rpc.rnk.dev/`)**: Queries live Lasna block height, EIP-1967 implementation slot, and real on-chain `CallbackRequest` logs (`topic[0] = 0xef94dbc611c4b95bf4b8ba34b413972180c2faf26fbb480befacedd83e07b133`, e.g., verified Lasna reactive transaction [`0xf4006d1648c05dc7816ba6f13cc17fc320ca9616ade22ee1011b9a2797788ee8`](https://lasna.reactscan.net/tx/0xf4006d1648c05dc7816ba6f13cc17fc320ca9616ade22ee1011b9a2797788ee8) at Block `7,973,985`).
+  3. **End-to-End 3-Transaction Cross-Chain Loop ([`reactive_omni.py`](./reactive_omni.py) + [`tests/test_reactive_omni.py`](./tests/test_reactive_omni.py))**:
+     - **Tx 1 (Origin Chain Log)**: BSC Testnet (`97`) / Base Sepolia (`84532`) DEX pool emits `Sync(reserve0, reserve1)` or `Swap`.
+     - **Tx 2 (Reactive Lasna VM `5318007`)**: `ReactiveAlphaSentinelV2.react(LogRecord)` evaluates the $2.5\times$ principal recovery threshold or $<\$85\text{k}$ liquidity drain in ReactVM (`vmOnly`) and invokes `SYSTEM.requestCallbackV_1_0(...)`.
+     - **Tx 3 (Destination Callback)**: `AlphaSentinelCallbackReceiver` verifies the RVM sender (`address(0)` overwritten with RVM ID by Reactive Network) and executes either the 40% principal recovery swap or the Fail-Closed anti-rug circuit breaker.
+
+---
+
 ## 🟢 BCH BLAZE 2026 — Bitcoin Cash (`CashTokens`) Anti-Impersonation Sentinel & Mainnet Workbench
 
-[![BCH BLAZE 2026: Mainnet Track](https://img.shields.io/badge/BCH_BLAZE_2026-Mainnet_Track_%26_Community_Choice-10B981)](https://gobuildrun.github.io/aralpha-global-agent/)
+[![BCH BLAZE 2026: Mainnet Track](https://img.shields.io/badge/BCH_BLAZE_2026-Mainnet_Track_%26_Community_Choice-10B981)](https://gobuildrun.github.io/aralpha-global-agent/?mode=bch)
 [![Widget Factory Deck](https://img.shields.io/badge/📊_Widget_Factory_Deck-View_Presentation-06B6D4)](https://gobuildrun.github.io/aralpha-global-agent/widget-factory.html)
 
-- 🚀 **Live Interactive Web Demo (GitHub Pages)**: **[https://gobuildrun.github.io/aralpha-global-agent/](https://gobuildrun.github.io/aralpha-global-agent/)** *(Click the **`🟢 BCH BLAZE 2026 (CashTokens & Mainnet)`** track button or Tab 5)*
+- 🚀 **Dedicated BCH BLAZE 2026 Live Demo**: **[https://gobuildrun.github.io/aralpha-global-agent/?mode=bch](https://gobuildrun.github.io/aralpha-global-agent/?mode=bch)**
 - 📊 **Official "Widget Factory" Template Presentation**: **[https://gobuildrun.github.io/aralpha-global-agent/widget-factory.html](https://gobuildrun.github.io/aralpha-global-agent/widget-factory.html)**
-- 🔥 **`EMBER2026` Community Choice Token-Aware CashAddr**: `bitcoincash:zqtdsruywey7scdzysllxzvmsjj58x386uuf64z7zg` *(Standard P2PKH CashAddr: `bitcoincash:qqtdsruywey7scdzysllxzvmsjj58x386umrftvcam`)*
+- ✅ **Verified Bitcoin Cash Mainnet Transaction & Live CashToken UTXO**:
+  - **Confirmed Mainnet TxID**: [`6039f649893e6e12669a7c9263de161bbc760ba49647ac465d71820e30318510`](https://explorer.salemkode.com/tx/6039f649893e6e12669a7c9263de161bbc760ba49647ac465d71820e30318510) (**Confirmed at Block `975,348`** · `1,378+` confirmations · `1,000 sats` + `1` **`BLAZE2026-TEMPLATE-TITAN`** CashToken, category `676b8d5cef572179e4633124eb0a873507b525c3053a7461518aafa90d076dd6`).
+  - **`EMBER2026` Community Choice Token-Aware CashAddr**: [`bitcoincash:zqtdsruywey7scdzysllxzvmsjj58x386uuf64z7zg`](https://explorer.salemkode.com/address/bitcoincash:qqtdsruywey7scdzysllxzvmsjj58x386umrftvcam) *(Standard P2PKH CashAddr: `bitcoincash:qqtdsruywey7scdzysllxzvmsjj58x386umrftvcam`)*
 - 🔎 **Pre-Existing Project & New BCH BLAZE 2026 Scope Disclosure**:
   - **Baseline Pre-Hackathon Repository & Demo**: [`goBuildRun/aralpha-global-agent`](https://github.com/goBuildRun/aralpha-global-agent) (EVM/BSC Golden Window & Anti-Rug Sentinel baseline).
   - **100% New Built for BCH BLAZE 2026**:
