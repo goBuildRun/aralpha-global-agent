@@ -27,6 +27,7 @@ STATIC_DIR = Path(__file__).resolve().parent / "static"
 import os  # noqa: E402
 
 import bch_cashtokens as bch  # noqa: E402
+import reactive_omni as ro  # noqa: E402
 
 # Trusted BCMR registry: defaults to bundled OpenTokenRegistry + ParyonUSD mainnet bundle (plus DUSD/DCT test vectors).
 BCMR_PATH = Path(os.environ.get("BCMR_REGISTRY_PATH") or Path(__file__).resolve().parent / "fixtures" / "bcmr_mainnet_otr.json")
@@ -147,6 +148,24 @@ def handle_api_request(method: str, path: str, body: Dict[str, Any]) -> Dict[str
             except Exception as e:  # try next server
                 errors.append(f"{host}: {type(e).__name__}")
         return {"ok": False, "error": "all Fulcrum servers failed", "details": errors}
+
+    if method == "GET" and path == "/api/reactive/chain-status":
+        return {"ok": True, "reactive_status": ro.query_reactive_chain_status()}
+
+    if method == "POST" and path == "/api/reactive/simulate-loop":
+        symbol = str(body.get("symbol") or "COAI")
+        entry_support = float(body.get("entry_support_price") or 0.1800)
+        spot_price = float(body.get("spot_price") or 0.4680)
+        reserve_liq = float(body.get("reserve_liquidity_usd") or 420000.0)
+        min_safe_liq = float(body.get("min_safe_liquidity_usd") or 85000.0)
+        loop_res = ro.simulate_reactive_loop(
+            symbol=symbol,
+            entry_support_price=entry_support,
+            spot_price=spot_price,
+            reserve_liquidity_usd=reserve_liq,
+            min_safe_liquidity_usd=min_safe_liq,
+        )
+        return {"ok": True, "reactive_loop": loop_res}
 
     return {"ok": False, "error": f"Unknown endpoint {method} {path}"}
 
