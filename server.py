@@ -27,6 +27,7 @@ STATIC_DIR = Path(__file__).resolve().parent / "static"
 import os  # noqa: E402
 
 import bch_cashtokens as bch  # noqa: E402
+import delphi_evidence_miner as dem  # noqa: E402
 import reactive_omni as ro  # noqa: E402
 
 # Trusted BCMR registry: defaults to bundled OpenTokenRegistry + ParyonUSD mainnet bundle (plus DUSD/DCT test vectors).
@@ -166,6 +167,45 @@ def handle_api_request(method: str, path: str, body: Dict[str, Any]) -> Dict[str
             min_safe_liquidity_usd=min_safe_liq,
         )
         return {"ok": True, "reactive_loop": loop_res}
+
+    if method == "GET" and path == "/api/delphi/markets":
+        evaluated = [
+            dem.evaluate_evidence_bundle(
+                market_id=m["market_id"],
+                note=m["candidate_note"],
+                source_links=m["source_links"],
+                supporting_files=m["supporting_files"],
+                p_market=m["lmsr_implied_prob"],
+                p_agent=m["agent_posterior_prob"],
+                submitted_slots_used=m["submitted_slots_used"],
+            )
+            for m in dem.SAMPLE_DELPHI_MARKETS
+        ]
+        return {
+            "ok": True,
+            "competition": dem.DELPHI_CONFIG,
+            "markets": dem.SAMPLE_DELPHI_MARKETS,
+            "evaluations": evaluated,
+        }
+
+    if method == "POST" and path == "/api/delphi/evaluate":
+        market_id = str(body.get("market_id") or "delphi-macro-fomc-dec-2026")
+        note = str(body.get("note") or dem.SAMPLE_DELPHI_MARKETS[0]["candidate_note"])
+        links = body.get("source_links") or dem.SAMPLE_DELPHI_MARKETS[0]["source_links"]
+        files = body.get("supporting_files") or []
+        p_market = float(body.get("p_market") if body.get("p_market") is not None else 0.54)
+        p_agent = float(body.get("p_agent") if body.get("p_agent") is not None else 0.71)
+        slots_used = int(body.get("submitted_slots_used") or 0)
+        res = dem.evaluate_evidence_bundle(
+            market_id=market_id,
+            note=note,
+            source_links=links,
+            supporting_files=files,
+            p_market=p_market,
+            p_agent=p_agent,
+            submitted_slots_used=slots_used,
+        )
+        return {"ok": True, "evaluation": res}
 
     return {"ok": False, "error": f"Unknown endpoint {method} {path}"}
 

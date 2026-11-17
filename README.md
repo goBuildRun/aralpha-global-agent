@@ -8,6 +8,7 @@
 [![Demo Video: YouTube 1080p](https://img.shields.io/badge/🎥%20Watch%20Demo%20Video-YouTube%201080p-red)](https://youtu.be/coP3PXuOTxg)
 
 > 🚀 **Try the Live Interactive Web Workbench (100% English, Public Zero-Login Browser Demo)**:
+> - **🟠 Gensyn Delphi Evidence Miner (`X-Delphi-Mode: competition` + LMSR KL Gate)**: **[https://gobuildrun.github.io/aralpha-global-agent/?mode=delphi](https://gobuildrun.github.io/aralpha-global-agent/?mode=delphi)**
 > - **🟣 Reactive Omni v2 View (`0x8888...8888` Live Lasna RPC)**: **[https://gobuildrun.github.io/aralpha-global-agent/?mode=reactive](https://gobuildrun.github.io/aralpha-global-agent/?mode=reactive)**
 > - **🟢 BCH BLAZE 2026 View (`CashTokens` + Confirmed Mainnet Tx `6039f649...8510`)**: **[https://gobuildrun.github.io/aralpha-global-agent/?mode=bch](https://gobuildrun.github.io/aralpha-global-agent/?mode=bch)**
 > - **🌐 Full Multi-Chain Workbench**: **[https://gobuildrun.github.io/aralpha-global-agent/](https://gobuildrun.github.io/aralpha-global-agent/)** *(or run locally via `python3 server.py --port 8766`)*
@@ -23,6 +24,18 @@
 **AlphaNexus (`Aralpha × AlphaRadar`)** is an institutional-grade **Autonomous On-Chain Alpha Hunter, Anti-Rug Security Sentinel, and Macro-to-OnChain Research Agent**. Instead of chasing newly listed tokens during the first-hour FOMO pump or falling prey to counterfeit honeypot contracts, AlphaNexus enforces a verifiable 4-stage closed loop:
 
 `1. AlphaRadar 4-Layer Macro-to-OnChain Evidence Chain ➔ 2. Fail-Closed Anti-Rug & Fake Token Sentinel (INV-06) ➔ 3. Wick-Stripped T+12h~72h Golden Washout Entry [support, +22%] ➔ 4. Automated 2.5x Principal Recovery ("Free-Ride") & 35% Moonbag Trailing Stop.`
+
+---
+
+## 🟠 Agent Arena: Evidence Mining (`Delphi × Gensyn`) — 4-Layer Verifiable Prediction Forecaster
+
+[![Delphi Evidence Miner](https://img.shields.io/badge/Gensyn_Delphi-Evidence_Mining_Agent_(AlphaNexus)-F59E0B)](https://gobuildrun.github.io/aralpha-global-agent/?mode=delphi)
+
+- 🚀 **Dedicated Delphi Evidence Mining Live Demo**: **[https://gobuildrun.github.io/aralpha-global-agent/?mode=delphi](https://gobuildrun.github.io/aralpha-global-agent/?mode=delphi)**
+- 🧠 **Engineered for DoraHacks `delphi-agent-competition2` ([`delphi_evidence_miner.py`](./delphi_evidence_miner.py) + [`tests/test_delphi_evidence_miner.py`](./tests/test_delphi_evidence_miner.py))**:
+  1. **Exact LMSR Kullback-Leibler Information-Gain Gate (`compute_lmsr_information_gain`)**: Quantifies expected log-score shift $D_{\text{KL}}(p_{\text{agent}} \parallel p_{\text{market}})$ and blocks low-divergence noise (`|Δp| < 8%`) to preserve Delphi's strict **3-submission-per-market** cap.
+  2. **Fail-Closed Tier-1 Primary-Source Quorum (`classify_source_links`)**: Rejects secondary rumor blogs unless backed by primary institutional/on-chain origins (`federalreserve.gov`, `bls.gov`, `sec.gov`, `etherscan.io`, `basescan.org`, `github.com`, `arxiv.org`).
+  3. **Official Competition Attribution Headers (`build_delphi_headers`)**: Attaches `X-Delphi-Mode: competition`, `X-Agent-ID: AlphaNexus-EvidenceMiner`, `X-Agent-Harness`, and `X-Agent-Model` with `<= 3` supporting artifacts per packet and campaign tracking for `>= 10` judged submissions across `>= 3` distinct markets.
 
 ---
 
