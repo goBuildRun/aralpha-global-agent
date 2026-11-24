@@ -28,6 +28,7 @@ import os  # noqa: E402
 
 import bch_cashtokens as bch  # noqa: E402
 import delphi_evidence_miner as dem  # noqa: E402
+import hsk_horizon as hsk  # noqa: E402
 import reactive_omni as ro  # noqa: E402
 
 # Trusted BCMR registry: defaults to bundled OpenTokenRegistry + ParyonUSD mainnet bundle (plus DUSD/DCT test vectors).
@@ -206,6 +207,42 @@ def handle_api_request(method: str, path: str, body: Dict[str, Any]) -> Dict[str
             submitted_slots_used=slots_used,
         )
         return {"ok": True, "evaluation": res}
+
+    if method == "GET" and path == "/api/hsk/chain-status":
+        return {"ok": True, "config": hsk.HSK_NETWORK_CONFIG, "status": hsk.query_hsk_chain_status()}
+
+    if method == "POST" and path == "/api/hsk/conversational-intent":
+        prompt = str(body.get("prompt") or "Balanced risk $400 on WHSK/USDC every 15m with 2.5x Free-Ride recovery")
+        return {"ok": True, "intent": hsk.parse_conversational_trading_intent(prompt)}
+
+    if method == "POST" and path == "/api/hsk/evaluate-trade":
+        res = hsk.evaluate_hskswap_opportunity(
+            symbol=str(body.get("symbol") or "WHSK"),
+            candidate_token=str(body.get("candidate_token") or hsk.HSK_NETWORK_CONFIG["canonical_mainnet_tokens"]["WHSK"]),
+            opening_1s_wick_low=float(body.get("opening_1s_wick_low") if body.get("opening_1s_wick_low") is not None else 0.3100),
+            wick_stripped_support=float(body.get("wick_stripped_support") if body.get("wick_stripped_support") is not None else 0.6800),
+            hskswap_spot_price=float(body.get("hskswap_spot_price") if body.get("hskswap_spot_price") is not None else 0.7480),
+            reference_cex_price=float(body.get("reference_cex_price") if body.get("reference_cex_price") is not None else 0.7690),
+            pool_quote_reserve_usd=float(body.get("pool_quote_reserve_usd") if body.get("pool_quote_reserve_usd") is not None else 185000.0),
+            order_size_usd=float(body.get("order_size_usd") if body.get("order_size_usd") is not None else 300.0),
+            sell_tax_bps=int(body.get("sell_tax_bps") if body.get("sell_tax_bps") is not None else 0),
+            top10_holder_bps=int(body.get("top10_holder_bps") if body.get("top10_holder_bps") is not None else 4200),
+            lp_locked=bool(body.get("lp_locked", True)),
+        )
+        return {"ok": True, "evaluation": res}
+
+    if method == "POST" and path == "/api/hsk/hsp-mandate":
+        try:
+            mandate = hsk.build_hsp_cart_mandate(
+                merchant_name=str(body.get("merchant_name") or "BuildRun"),
+                pay_to=str(body.get("pay_to") or "0x2d463b4b66c3b066d572471413b8a764b8a2a7d3"),
+                payer=str(body.get("payer") or "0x1111111111111111111111111111111111111111"),
+                amount_usd=str(body.get("amount_usd") or "1.00"),
+                payment_protocol=str(body.get("payment_protocol") or "eip3009"),
+            )
+            return {"ok": True, "mandate": mandate}
+        except ValueError as exc:
+            return {"ok": False, "error": str(exc)}
 
     return {"ok": False, "error": f"Unknown endpoint {method} {path}"}
 

@@ -8,6 +8,7 @@
 [![Demo Video: YouTube 1080p](https://img.shields.io/badge/🎥%20Watch%20Demo%20Video-YouTube%201080p-red)](https://youtu.be/coP3PXuOTxg)
 
 > 🚀 **Try the Live Interactive Web Workbench (100% English, Public Zero-Login Browser Demo)**:
+> - **🔷 HSK Chain Horizon (`HSKSwap` AI Trading & `HSP` x402 Mandate View)**: **[https://gobuildrun.github.io/aralpha-global-agent/?mode=hsk](https://gobuildrun.github.io/aralpha-global-agent/?mode=hsk)**
 > - **🟠 Gensyn Delphi Evidence Miner (`X-Delphi-Mode: competition` + LMSR KL Gate)**: **[https://gobuildrun.github.io/aralpha-global-agent/?mode=delphi](https://gobuildrun.github.io/aralpha-global-agent/?mode=delphi)**
 > - **🟣 Reactive Omni v2 View (`0x8888...8888` Live Lasna RPC)**: **[https://gobuildrun.github.io/aralpha-global-agent/?mode=reactive](https://gobuildrun.github.io/aralpha-global-agent/?mode=reactive)**
 > - **🟢 BCH BLAZE 2026 View (`CashTokens` + Confirmed Mainnet Tx `6039f649...8510`)**: **[https://gobuildrun.github.io/aralpha-global-agent/?mode=bch](https://gobuildrun.github.io/aralpha-global-agent/?mode=bch)**
@@ -24,6 +25,17 @@
 **AlphaNexus (`Aralpha × AlphaRadar`)** is an institutional-grade **Autonomous On-Chain Alpha Hunter, Anti-Rug Security Sentinel, and Macro-to-OnChain Research Agent**. Instead of chasing newly listed tokens during the first-hour FOMO pump or falling prey to counterfeit honeypot contracts, AlphaNexus enforces a verifiable 4-stage closed loop:
 
 `1. AlphaRadar 4-Layer Macro-to-OnChain Evidence Chain ➔ 2. Fail-Closed Anti-Rug & Fake Token Sentinel (INV-06) ➔ 3. Wick-Stripped T+12h~72h Golden Washout Entry [support, +22%] ➔ 4. Automated 2.5x Principal Recovery ("Free-Ride") & 35% Moonbag Trailing Stop.`
+
+---
+
+## 🔷 HSK Chain Horizon Hackathon · Seoul — Autonomous HSKSwap Trading Sentinel & HSP x402 Mandate Engine
+
+[![HSK Chain Horizon](https://img.shields.io/badge/HSK_Chain_177_%2F_133-HSKSwap_AI_Trading_%26_HSP_x402-38BDF8)](https://gobuildrun.github.io/aralpha-global-agent/?mode=hsk)
+
+- 🚀 **Dedicated HSK Chain Live Workbench (`?mode=hsk`)**: **[https://gobuildrun.github.io/aralpha-global-agent/?mode=hsk](https://gobuildrun.github.io/aralpha-global-agent/?mode=hsk)** *(Includes 1-click browser wallet deployer for `AlphaNexusHSKSentinel.sol`)*
+- 📜 **Compiled Solidity Guard & Python Engine**: [`contracts/AlphaNexusHSKSentinel.sol`](./contracts/AlphaNexusHSKSentinel.sol) (`solc 0.8.28`, `1,146,264` gas verified via `eth_estimateGas` on HSK Mainnet `177` & Testnet `133`) · [`hsk_horizon.py`](./hsk_horizon.py) · [`tests/test_hsk_horizon.py`](./tests/test_hsk_horizon.py)
+  1. **Track 1 (`AI Agent Trading` on `HSKSwap`)**: Live JSON-RPC verification against `https://mainnet.hsk.xyz` (`Chain ID: 177`, canonical `WHSK` `0xB210D2...1Cf1` & `USDC` `0x054ed4...8D0a` bytecode), conversational risk/size/frequency intent parser, wick-stripped `[support, +22%]` Golden Buy Zone, `<= 1.5%` pool-depth tranche slicer, `INV-06` honeypot gate, and `2.5x Free-Ride` (`40%` sell = `100%` principal recovery).
+  2. **Track 2 (`Agent Payments & A2A Settlement` via `HSP`)**: Spec-compliant `hsp-agentic-payment` `create_order` `cart_mandate` builder (`supported_methods: ["https://www.x402.org/"]`, `data.x402Version: 2`, `eip3009` / `permit2`, strict `payer != pay_to` separation, and on-chain `anchorHSPPaymentMandate` replay guard).
 
 ---
 
